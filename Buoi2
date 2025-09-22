@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<Student> students = new List<Student>
+        {
+            new Student { Id = 1, Name = "Anh", Age = 16 },
+            new Student { Id = 2, Name = "Binh", Age = 17 },
+            new Student { Id = 3, Name = "An", Age = 15 },
+            new Student { Id = 4, Name = "Chau", Age = 19 },
+            new Student { Id = 5, Name = "Dung", Age = 18 }
+        };
+
+        // a
+        Console.WriteLine("a. Toan bo danh sach hoc sinh:");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // b
+        Console.WriteLine("\nb. Cac hoc sinh co tuoi tu 15-18:");
+        var ageRange = students.Where(s => s.Age >= 15 && s.Age <= 18);
+        foreach (var student in ageRange)
+        {
+            Console.WriteLine($"Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // c
+        Console.WriteLine("\nc. Cac hoc sinh co ten bat đau bang 'A':");
+        var nameStartA = students.Where(s => s.Name.StartsWith("A"));
+        foreach (var student in nameStartA)
+        {
+            Console.WriteLine($"Name: {student.Name}, Age: {student.Age}");
+        }
+
+        // d
+        Console.WriteLine("\nd. Tong tuoi caa tat ca hoc sinh: " + students.Sum(s => s.Age));
+
+        // e
+        Console.WriteLine("\ne. Hoc sinh tre nhat:");
+        var youngest = students.OrderBy(s => s.Age).First();
+        Console.WriteLine($"Name: {youngest.Name}, Age: {youngest.Age}");
+
+        // f
+        Console.WriteLine("\nf. Danh sach da sap xep theo tuoi:");
+        var sortedByAge = students.OrderBy(s => s.Age);
+        foreach (var student in sortedByAge)
+        {
+            Console.WriteLine($"Name: {student.Name}, Age: {student.Age}");
+        }
+    }
+}
